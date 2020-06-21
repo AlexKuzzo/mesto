@@ -7,18 +7,20 @@
   cursor: pointer;
   margin-left: 17px;
   margin-top: 19px;
+  transition: opacity 0.3s ease-out 0s;
   
 }
 
 .profile__edit-button:hover {
-    transition: opacity 0.4s ease-out 0s;
+    opacity: 0.6;
 }
 
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 480px) {
   .profile__edit-button {
     background: url(../../../images/edit-button_mobile.svg);
     width: 18px;
     height: 18px;
+    margin-left: 7px;
   }
 }

@@ -8,17 +8,19 @@
 
 .profile {
   max-width: 882px;
-  width: 100%;
+  width: 75%;
   margin: 0 auto;
   display: flex;
+  padding-bottom: 50px;
   align-items: center;
 }
 
+ 
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 910px) {
   .profile {
     justify-content: center;
     flex-direction: column;
-    margin-bottom: 36px;
+    padding-bottom: 36px;
   }
-}
+ } 

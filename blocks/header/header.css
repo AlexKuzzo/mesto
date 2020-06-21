@@ -3,11 +3,18 @@
 
 .header {
   max-width: 882px;
+  width: 75%;
   padding-top: 45px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  margin-bottom: 40px;
-  /* border: 1px solid red; */
   margin: 0 auto 40px;
 }
+
+
+@media screen and (max-width: 480px) {
+  .header {
+    padding-top: 28px;
+    width: 100%;
+  }
+ }  
