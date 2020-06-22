@@ -1,11 +1,14 @@
 .profile__info {
   margin-left: 30px;
+  max-width: 50%;
   flex-wrap: wrap;
+  position: relative;
 }
 
 
 @media screen and (max-width: 910px) { 
   .profile__info {
+    max-width: 100%;
     margin: 5px auto 36px;
   }
 } 
