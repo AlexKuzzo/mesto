@@ -10,76 +10,76 @@
 <body class="page">
     <header class="header">
       <img src="./images/logo.svg" alt="лого" class="header__logo">
-      <div class="header__line"></div>
     </header>
+    
+    <main class="content">
+      <section class="profile">
+        <img src="./images/avatar.jpg" alt="аватар" class="profile__avatar">
+        <div class="profile__info">
+          <div class="profile__list">
+            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <button type="button" class="profile__edit-button"></button>
+          </div>
+          <p class="profile__subtitle">Исследователь океана</p>
+        </div>
+        <button type="button" class="profile__add-button"></button>
+      </section>
 
-    <section class="profile">
-      <img src="./images/avatar.jpg" alt="аватар" class="profile__avatar">
-      <div class="profile__info">
-        <div class="profile__list">
-          <h1 class="profile__title">Жак-Ив Кусто</h1>
-          <button type="button" class="profile__edit-button"></button>
-        </div>
-        <p class="profile__subtitle">Исследователь океана</p>
-      </div>
-      <button type="button" class="profile__add-button"></button>
-    </section>
-
-    <section class="elements">
-      <div class="element">
-        <img src="./images/more-pejzazh-plyazh-priroda.jpg" alt="Море пляж" class="element__image">
-        <div class="element__item">
-          <h2 class="element__title">Карибы</h2>
-          <button class="element__like-button"></button>
-        </div>
-      </div>
-      <div class="element">
-        <img src="./images/palmy-pejzazh-plyazh-priroda.jpg" alt="Закат на пляже" class="element__image">
-        <div class="element__item">
-          <h2 class="element__title">Закат</h2>
-          <button class="element__like-button"></button>
-        </div>
-      </div>
-      <div class="element">
-        <img src="./images/derevya-gory-pejzazh-trava.jpg" alt="Деревья и горы" class="element__image">
-        <div class="element__item">
-          <h2 class="element__title">Деревья и горы</h2>
-          <button class="element__like-button"></button>
-        </div>
-      </div>
-      <div class="element">
-        <img src="./images/pejzazh-voda.jpg" alt="Пейзаж утро" class="element__image">
-        <div class="element__item">
-          <h2 class="element__title">Утро</h2>
-          <button class="element__like-button"></button>
-        </div>
-      </div>
-      <div class="element">
-        <img src="./images/more-pejzazh-priroda.jpg" alt="Волны" class="element__image">
-        <div class="element__item">
-          <h2 class="element__title">Волны</h2>
-          <button class="element__like-button"></button>
-        </div>
-      </div>
-      <div class="element">
-        <img src="./images/ozera-pejzazh-priroda.jpg" alt="Озеро" class="element__image">
-        <div class="element__item">
-          <h2 class="element__title">Озеро</h2>
-          <button class="element__like-button"></button>
-        </div>
-      </div>
-    </section>
+      <section class="elements">
+        <ul class="element">
+          <img src="./images/more-pejzazh-plyazh-priroda.jpg" alt="Море пляж" class="element__image">
+          <li class="element__item">
+            <h2 class="element__title">Карибы</h2>
+            <button type="button" class="element__like-button"></button>
+          </li>
+        </ul>
+        <ul class="element">
+          <img src="./images/palmy-pejzazh-plyazh-priroda.jpg" alt="Закат на пляже" class="element__image">
+          <li class="element__item">
+            <h2 class="element__title">Закат</h2>
+            <button type="button" class="element__like-button"></button>
+          </li>
+        </ul>
+        <ul class="element">
+          <img src="./images/derevya-gory-pejzazh-trava.jpg" alt="Деревья и горы" class="element__image">
+          <li class="element__item">
+            <h2 class="element__title">Деревья и горы</h2>
+            <button type="button" class="element__like-button"></button>
+          </li>
+        </ul>
+        <ul class="element">
+          <img src="./images/pejzazh-voda.jpg" alt="Пейзаж утро" class="element__image">
+          <li class="element__item">
+            <h2 class="element__title">Утро</h2>
+            <button type="button" class="element__like-button"></button>
+          </li>
+        </ul>
+        <ul class="element">
+          <img src="./images/more-pejzazh-priroda.jpg" alt="Волны" class="element__image">
+          <li class="element__item">
+            <h2 class="element__title">Волны</h2>
+            <button type="button" class="element__like-button"></button>
+          </li>
+        </ul>
+        <ul class="element">
+          <img src="./images/ozera-pejzazh-priroda.jpg" alt="Озеро" class="element__image">
+          <li class="element__item">
+            <h2 class="element__title">Озеро</h2>
+            <button type="button" class="element__like-button"></button>
+          </li>
+        </ul>
+      </section>
+    </main>
 
     <footer class="footer">
       <p class="footer__title">&copy;&nbsp;2020 Mesto Russia</p>
     </footer>
 
-    <div class="popup popup_opened">
-      <div class="popup__overlay"></div>
+    <div class="popup">
       <form class="popup__form">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input type="text" class="popup__field popup__field_type_name">
-        <input type="text" class="popup__field popup__field_type_description">
+        <input name="name" type="text" class="popup__field popup__field_type_name">
+        <input name="job" type="text" class="popup__field popup__field_type_description">
         <button class="popup__submit-button" type="submit">Сохранить</button>
         <button class="popup__close-button" type="button"></button>
       </form>

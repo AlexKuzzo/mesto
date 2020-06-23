@@ -13,4 +13,7 @@
   background-color: #ffffff;
   margin: 0 auto;
   overflow: hidden;
+  list-style-type: none;
+  padding: 0;
+  border-radius: 10px;
 }
