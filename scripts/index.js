@@ -39,14 +39,16 @@ let nameInput = document.querySelector('.popup__field_type_name');
 let jobInput = document.querySelector('.popup__field_type_description');
 
 
-const popupToggle = function () {
-  popup.classList.toggle('popup_opened');
-  
-  if (popupProfile.classList.contains('popup_opened')) {
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileJob.textContent;
+const popupToggle = function (event) {
+  popup.classList.toggle('popup_opened')
+  document.activeElement.blur();
+
+   if (popupProfile.classList.contains('popup_opened')) {
+     nameInput.value = profileName.textContent;
+     jobInput.value = profileJob.textContent;
   }
 }
+
 
 
   popupOpenButton.addEventListener('click', popupToggle);
@@ -68,7 +70,15 @@ const placeSubmitHandler = function(evt) {
   popupToggle(popupAddCard);
 }
 
-popupAddButton.addEventListener('click', popupToggle);
+// открытие попапа добавление картинок
+popupAddButton.addEventListener('click',() => {
+  popupAddCard.classList.toggle('popup_opened')
+});
+
+//закрытие попапа добавление картинок
+popupCloseButton.addEventListener('click',() => {
+  popupAddCard.classList.toggle();
+});
 
 
     
