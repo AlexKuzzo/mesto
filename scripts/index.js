@@ -28,6 +28,7 @@ const initialCards = [
 const popup = document.querySelector('.popup');
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupAddCard = document.querySelector('.popup_type_add-card');
+const popupPhoto = document.querySelector('.popup_type_photo');
 const cards = document.querySelector('.elements');
 const popupCloseButton = document.querySelector('.popup__close-button');
 const popupCloseAddCardButton = document.querySelector('.popup__close-button_card')
@@ -73,14 +74,10 @@ const popupToggle = function(popup) {
 
 
 
-//popup.addEventListener('click', profileToggleHandler)
-
-// лайк 
+// создать лайки
 const like = function(evt) {
   evt.currentTarget.classList.toggle('element__like-button_active');
 }
-// слушатель для лайка
-//const likeButton = cardsElement.querySelector('.element__like-button').addEventListener('click',like);
 
 
 // popupAddCard
@@ -94,7 +91,7 @@ const addCardToggleHandler = function() {
   popupToggle(popupAddCard);
 }
 
-// удаление картинки
+// удаление карточки
 const cardDelete = function(evt) {
   evt.target.closest('.element').remove()
 }
@@ -105,6 +102,7 @@ const cardDelete = function(evt) {
 popupAddButton.addEventListener('click',() => {
   popupAddCard.classList.toggle('popup_opened')
 });
+//закрытие попап add-card
 popupCloseAddCardButton.addEventListener('click', addCardToggleHandler);
 
 
@@ -118,6 +116,25 @@ const popupBackgroundClose = function(event) {
   // слушатели для закрытия по фону
   popupProfile.addEventListener('click', popupBackgroundClose);
   popupAddCard.addEventListener('click', popupBackgroundClose);
+  popupPhoto.addEventListener('click', popupBackgroundClose);
+
+
+
+// открытие попапа photo
+const openPopupPhoto = function(evt) {
+  const photoImage = document.querySelector('.popup__photo').src = evt.currentTarget.src;
+  const photoName = document.querySelector('.popup__photo-name').textContent = evt.currentTarget.alt;
+  photoImage.alt = evt.currentTarget.alt;
+
+  popupToggle(popupPhoto)
+}
+const closePopupPhoto = function () {
+  popupToggle(popupPhoto)
+}
+
+//слушатель закрытия попап photo
+const popupPhotoCloseButton = document.querySelector('.popup__close-button_photo').addEventListener('click', closePopupPhoto);
+
 
 
 // создание и рендеринг массива карточек
@@ -131,6 +148,7 @@ function createdCard (card) {
   cardsElement.querySelector('.element__title').textContent = card.name;
   cardsElement.querySelector('.element__like-button').addEventListener('click', like);
   cardsElement.querySelector('.element__delete-button').addEventListener('click', cardDelete);
+  cardsElement.querySelector('.element__image').addEventListener('click', openPopupPhoto); ///////////
   return cardsElement;
 };
 
@@ -168,6 +186,9 @@ const elementSubmitHandler = function(evt) {
 } 
 // слушатель на submit card
 popupFormAddCard.addEventListener('submit', elementSubmitHandler);
+
+
+
 
 
 
