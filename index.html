@@ -26,7 +26,7 @@
       </section>
 
       <section class="elements">
-        <ul class="element">
+        <!-- <ul class="element">
           <img src="./images/more-pejzazh-plyazh-priroda.jpg" alt="Море пляж" class="element__image">
           <button class="element__delete-button" type="button"></button>
           <li class="element__item">
@@ -73,12 +73,12 @@
             <h2 class="element__title">Озеро</h2>
             <button type="button" class="element__like-button"></button>
           </li>
-        </ul>
+        </ul> -->
       </section>
     </main>
 
     <footer class="footer">
-      <p class="footer__title">&copy;&nbsp;2020 Mesto Russia</p>
+      <p class="footer__title">&copy;&nbsp;2020 Kuznetsov Alexey</p>
     </footer>
 
     <div class="popup popup_type_profile">
@@ -92,12 +92,12 @@
     </div>
 
     <div class="popup popup_type_add-card">
-      <form class="popup__form">
+      <form class="popup__form popup__form_add-card">
         <h2 class="popup__title">Новое место</h2>
-        <input name="place-name" type="text" placeholder="Название" class="popup__field popup__field_type_name">
-        <input name="link" type="text" placeholder="Ссылка на картинку" class="popup__field popup__field_type_description">
-        <button class="popup__submit-button" type="submit">Создать</button>
-        <button class="popup__close-button" type="button"></button>
+        <input name="place-name" type="text" placeholder="Название" class="popup__field popup__field_type_name-card">
+        <input name="link" type="text" placeholder="Ссылка на картинку" class="popup__field popup__field_type_link">
+        <button class="popup__submit-button popup__submit-button_card" type="submit">Создать</button>
+        <button class="popup__close-button popup__close-button_card" type="button"></button>
       </form>
     </div>
 
@@ -105,10 +105,14 @@
 
     </div>
 
-    <template class="element-template">
+    <template class="cards-template">
       <ul class="element">
-        <img class="element__image">
+        <img class="element__image" alt>
         <button class="element__delete-button" type="button"></button>
+        <li class="element__item">
+          <h2 class="element__title"></h2>
+          <button type="button" class="element__like-button"></button>
+        </li>
       </ul>
     </template>
 
