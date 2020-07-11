@@ -34,14 +34,22 @@ const popupCloseButton = document.querySelector('.popup__close-button');
 const popupCloseAddCardButton = document.querySelector('.popup__close-button_card')
 const popupEditButton = document.querySelector('.profile__edit-button');
 const popupForm = document.querySelector('.popup__form');
-const popupFormAddCard =document.querySelector('.popup__form_add-card');
+const popupFormAddCard = document.querySelector('.popup__form_add-card');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
 const popupAddButton = document.querySelector('.profile__add-button');
 const elementDeleteCard = document.querySelector('.element__delete-button');
+const photoImage = document.querySelector('.popup__photo');
+const photoName = document.querySelector('.popup__photo-name');
+const popupPhotoCloseButton = document.querySelector('.popup__close-button_photo');
+const elementImage = document.querySelector('.element__image');
+const elementTitle = document.querySelector('.element__title');
+const elementLikeButton = document.querySelector('.element__like-button');
 
-let nameInput = document.querySelector('.popup__field_type_name');
-let jobInput = document.querySelector('.popup__field_type_description');
+const nameInput = document.querySelector('.popup__field_type_name');
+const jobInput = document.querySelector('.popup__field_type_description');
+const newElementNameInput = document.querySelector('.popup__field_type_name-card');
+const newelementLinkInput = document.querySelector('.popup__field_type_link');
 
 // переключатель всех попапов 
 const popupToggle = function(popup) {
@@ -80,16 +88,12 @@ const like = function(evt) {
 }
 
 
-// popupAddCard
-const placeSubmitHandler = function(evt) {
-  evt.preventDefault();
 
-  popupToggle(popupAddCard);
-}
+// открытие и закрытие popupAddCard
+popupAddButton.addEventListener('click', () => popupToggle(popupAddCard));
+popupCloseAddCardButton.addEventListener('click', () => popupToggle(popupAddCard));
 
-const addCardToggleHandler = function() {
-  popupToggle(popupAddCard);
-}
+
 
 // удаление карточки
 const cardDelete = function(evt) {
@@ -98,66 +102,52 @@ const cardDelete = function(evt) {
 
 
 
-// открытие попапа add-card 
-popupAddButton.addEventListener('click',() => {
-  popupAddCard.classList.toggle('popup_opened')
-});
-//закрытие попап add-card
-popupCloseAddCardButton.addEventListener('click', addCardToggleHandler);
+// // закрытие попапа по фону ----------------------(если можно оставлю, так на будущее?)
+// const popupBackgroundClose = function(event) {
+//   if (event.target !== event.currentTarget) 
+//   { return }
+//     popupToggle(event.target)
+//   }
+//   // слушатели для закрытия по фону
+//   popupProfile.addEventListener('click', popupBackgroundClose);
+//   popupAddCard.addEventListener('click', popupBackgroundClose);
+//   popupPhoto.addEventListener('click', popupBackgroundClose);
 
 
 
-// закрытие попапа по фону 
-const popupBackgroundClose = function(event) {
-  if (event.target !== event.currentTarget) 
-  { return }
-    popupToggle(event.target)
-  }
-  // слушатели для закрытия по фону
-  popupProfile.addEventListener('click', popupBackgroundClose);
-  popupAddCard.addEventListener('click', popupBackgroundClose);
-  popupPhoto.addEventListener('click', popupBackgroundClose);
-
-
-
-// открытие попапа photo
+// popupPhoto
 const openPopupPhoto = function(evt) {
-  const photoImage = document.querySelector('.popup__photo').src = evt.currentTarget.src;
-  const photoName = document.querySelector('.popup__photo-name').textContent = evt.currentTarget.alt;
+  photoImage.src = evt.currentTarget.src;
+  photoName.textContent = evt.currentTarget.alt;
   photoImage.alt = evt.currentTarget.alt;
 
   popupToggle(popupPhoto)
 }
-const closePopupPhoto = function () {
-  popupToggle(popupPhoto)
-}
 
-//слушатель закрытия попап photo
-const popupPhotoCloseButton = document.querySelector('.popup__close-button_photo').addEventListener('click', closePopupPhoto);
-
+// закрытие popupPhoto
+popupPhotoCloseButton.addEventListener('click', () => popupToggle(popupPhoto));
 
 
 // создание и рендеринг массива карточек
 function createdCard (card) {
   const cardsTemplate = document.querySelector('.cards-template').content;
   const cardsElement = cardsTemplate.cloneNode(true);
-  const elementsAllCards = document.querySelector('.elements')
-
-  cardsElement.querySelector('.element__image').src = card.link;
-  cardsElement.querySelector('.element__image').alt = card.name;
-  cardsElement.querySelector('.element__title').textContent = card.name;
-  cardsElement.querySelector('.element__like-button').addEventListener('click', like);
-  cardsElement.querySelector('.element__delete-button').addEventListener('click', cardDelete);
-  cardsElement.querySelector('.element__image').addEventListener('click', openPopupPhoto); ///////////
+  const cardsElementImage = cardsElement.querySelector('.element__image');
+  const cardsElementTitle = cardsElement.querySelector('.element__title');
+  const cardsElementLikeButton = cardsElement.querySelector('.element__like-button');
+  const cardsElementDeleteButton = cardsElement.querySelector('.element__delete-button');
+  // наполняем из массива
+  cardsElementImage.src = card.link; 
+  cardsElementImage.alt = card.name; 
+  cardsElementTitle.textContent = card.name; 
+  cardsElementLikeButton.addEventListener('click', like); 
+  cardsElementDeleteButton.addEventListener('click', cardDelete); 
+  cardsElementImage.addEventListener('click', openPopupPhoto);
   return cardsElement;
 };
 
 
 //перебор массива
-initialCards.forEach(card => {
-  createdCard(card)
-});
-
 function rendCards(newCards) {
   newCards.forEach(card => {
     cards.prepend(createdCard(card))
@@ -169,9 +159,6 @@ rendCards(initialCards);
 // добавить новую карточку
 const elementSubmitHandler = function(evt) {
   evt.preventDefault();
-
-  let newElementNameInput = document.querySelector('.popup__field_type_name-card');
-  let newelementLinkInput = document.querySelector('.popup__field_type_link');
 
   const elementFormName = {
     name: newElementNameInput.value,
