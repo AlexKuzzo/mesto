@@ -35,8 +35,8 @@
     <div class="popup popup_type_profile">
       <form class="popup__form">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input name="name" type="text" class="popup__field popup__field_type_name">
-        <input name="job" type="text" class="popup__field popup__field_type_description">
+        <input name="name" type="text" required class="popup__field popup__field_type_name">
+        <input name="job" type="text" required class="popup__field popup__field_type_description">
         <button class="popup__submit-button" type="submit">Сохранить</button>
         <button class="popup__close-button" type="button"></button>
       </form>
@@ -45,8 +45,8 @@
     <div class="popup popup_type_add-card">
       <form class="popup__form popup__form_add-card">
         <h2 class="popup__title">Новое место</h2>
-        <input name="place-name" type="text" placeholder="Название" class="popup__field popup__field_type_name-card">
-        <input name="link" type="text" placeholder="Ссылка на картинку" class="popup__field popup__field_type_link">
+        <input name="place-name" type="text" required placeholder="Название" class="popup__field popup__field_type_name-card">
+        <input name="link" type="url" required placeholder="Ссылка на картинку" class="popup__field popup__field_type_link">
         <button class="popup__submit-button popup__submit-button_card" type="submit">Создать</button>
         <button class="popup__close-button popup__close-button_card" type="button"></button>
       </form>
@@ -54,7 +54,7 @@
 
     <div class="popup popup_type_photo">
       <div class="popup__photo-container">
-        <img class="popup__photo" alt="">
+        <img class="popup__photo" src="#" alt="тут будет ваша картинка">
         <p class="popup__photo-name"></p>
         <button class="popup__close-button popup__close-button_photo" type="button"></button>
       </div>
@@ -62,12 +62,14 @@
 
     <template class="cards-template">
       <ul class="element">
-        <img class="element__image" alt="">
-        <button class="element__delete-button" type="button"></button>
-        <li class="element__item">
+        <li class="element-list">
+          <img class="element__image" alt="">
+          <button class="element__delete-button" type="button"></button>
+        </li>
+        <div class="element__item">
           <h2 class="element__title"></h2>
           <button type="button" class="element__like-button"></button>
-        </li>
+        </div>
       </ul>
     </template>
 

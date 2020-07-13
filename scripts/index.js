@@ -80,40 +80,19 @@ const popupToggle = function(popup) {
   popupCloseButton.addEventListener('click', profileToggleHandler);
   popupForm.addEventListener('submit', profileFormSubmitHandler);
 
-
-
 // создать лайки
 const like = function(evt) {
   evt.currentTarget.classList.toggle('element__like-button_active');
 }
 
-
-
 // открытие и закрытие popupAddCard
 popupAddButton.addEventListener('click', () => popupToggle(popupAddCard));
 popupCloseAddCardButton.addEventListener('click', () => popupToggle(popupAddCard));
-
-
 
 // удаление карточки
 const cardDelete = function(evt) {
   evt.target.closest('.element').remove()
 }
-
-
-
-// // закрытие попапа по фону ----------------------(если можно оставлю, так на будущее?)
-// const popupBackgroundClose = function(event) {
-//   if (event.target !== event.currentTarget) 
-//   { return }
-//     popupToggle(event.target)
-//   }
-//   // слушатели для закрытия по фону
-//   popupProfile.addEventListener('click', popupBackgroundClose);
-//   popupAddCard.addEventListener('click', popupBackgroundClose);
-//   popupPhoto.addEventListener('click', popupBackgroundClose);
-
-
 
 // popupPhoto
 const openPopupPhoto = function(evt) {
@@ -126,7 +105,6 @@ const openPopupPhoto = function(evt) {
 
 // закрытие popupPhoto
 popupPhotoCloseButton.addEventListener('click', () => popupToggle(popupPhoto));
-
 
 // создание и рендеринг массива карточек
 function createdCard (card) {
@@ -146,7 +124,6 @@ function createdCard (card) {
   return cardsElement;
 };
 
-
 //перебор массива
 function rendCards(newCards) {
   newCards.forEach(card => {
@@ -154,7 +131,6 @@ function rendCards(newCards) {
   });
 }
 rendCards(initialCards);
-
 
 // добавить новую карточку
 const elementSubmitHandler = function(evt) {
@@ -173,45 +149,3 @@ const elementSubmitHandler = function(evt) {
 } 
 // слушатель на submit card
 popupFormAddCard.addEventListener('submit', elementSubmitHandler);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
