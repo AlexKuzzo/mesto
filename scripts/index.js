@@ -51,14 +51,21 @@ const jobInput = document.querySelector('.popup__field_type_description');
 const newElementNameInput = document.querySelector('.popup__field_type_name-card');
 const newelementLinkInput = document.querySelector('.popup__field_type_link');
 
-// переключатель всех попапов 
-const popupToggle = function(popup) {
-  popup.classList.toggle('popup_opened');
+//открытие попапа
+const popupOpen = function(popup) {
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', popupEscClose);
+}
+
+//закрытие попапа
+const popupClose = function(popup) {
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', popupEscClose);
 }
 
 // popupProfile handlers
   function profileToggleHandler () {
-    popupToggle(popupProfile);
+    popupOpen(popupProfile);
 
     if (popupProfile.classList.contains('popup_opened')) {
      nameInput.value = profileName.textContent;
@@ -72,22 +79,50 @@ const popupToggle = function(popup) {
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
 
-    popupToggle(popupProfile); 
+    popupClose(popupProfile); 
   }
+// закрытие ProfileHandlers
+const closeProfileHandlers = function () {
+  popupClose(popupProfile);
+}
 
 //слушатели popupProfile
   popupEditButton.addEventListener('click', profileToggleHandler);
-  popupCloseButton.addEventListener('click', profileToggleHandler);
+  popupCloseButton.addEventListener('click', closeProfileHandlers);
   popupForm.addEventListener('submit', profileFormSubmitHandler);
+
+// закрытие попапа по клавише Esc
+const popupEscClose = function (evt) {
+  if (evt.key === 'Escape') {
+    const popupActive = document.querySelector('.popup_opened')
+    popupClose(popupActive);
+  }
+}
+
+// закрытие попапа по фону 
+const popupBackgroundClose = function(event) {
+  if (event.target !== event.currentTarget) {
+    return
+  } 
+    popupClose(event.target);
+}
+  // слушатели для закрытия по фону
+  popupProfile.addEventListener('click', popupBackgroundClose);
+  popupAddCard.addEventListener('click', popupBackgroundClose);
+  popupPhoto.addEventListener('click', popupBackgroundClose);
 
 // создать лайки
 const like = function(evt) {
   evt.currentTarget.classList.toggle('element__like-button_active');
 }
+// закрытие AddCardHandlers
+const closeAddCardHandlers = function () {
+  popupClose(popupAddCard);
+}
 
-// открытие и закрытие popupAddCard
-popupAddButton.addEventListener('click', () => popupToggle(popupAddCard));
-popupCloseAddCardButton.addEventListener('click', () => popupToggle(popupAddCard));
+// открытие и закрытие обработчики popupAddCard
+popupAddButton.addEventListener('click', () => popupOpen(popupAddCard));
+popupCloseAddCardButton.addEventListener('click', () => closeAddCardHandlers(popupAddCard));
 
 // удаление карточки
 const cardDelete = function(evt) {
@@ -100,11 +135,15 @@ const openPopupPhoto = function(evt) {
   photoName.textContent = evt.currentTarget.alt;
   photoImage.alt = evt.currentTarget.alt;
 
-  popupToggle(popupPhoto)
+  popupOpen(popupPhoto)
+}
+// закрытие PhotoHandlers
+const closePhotoHandlers = function () {
+  popupClose(popupPhoto);
 }
 
 // закрытие popupPhoto
-popupPhotoCloseButton.addEventListener('click', () => popupToggle(popupPhoto));
+popupPhotoCloseButton.addEventListener('click', () => closePhotoHandlers(popupPhoto));
 
 // создание и рендеринг массива карточек
 function createdCard (card) {
@@ -129,7 +168,7 @@ function rendCards(newCards) {
   newCards.forEach(card => {
     cards.prepend(createdCard(card))
   });
-}
+};
 rendCards(initialCards);
 
 // добавить новую карточку
@@ -139,13 +178,13 @@ const elementSubmitHandler = function(evt) {
   const elementFormName = {
     name: newElementNameInput.value,
     link: newelementLinkInput.value
-  }
+  };
   cards.prepend(createdCard(elementFormName));
-  popupToggle(popupAddCard);
+  popupClose(popupAddCard);
 
   //обнулить поля
   newElementNameInput.value = '';
   newelementLinkInput.value = '';
-} 
+};
 // слушатель на submit card
 popupFormAddCard.addEventListener('submit', elementSubmitHandler);
