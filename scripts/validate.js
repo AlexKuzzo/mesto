@@ -7,17 +7,10 @@ const validationConfig = {
     errorClass: 'popup__input-error_visible'
 };
 
-// const formSelector = document.querySelector('.popup__form');
-// const inputSelector = document.querySelector('.popup__field');
-// const submitButtonSelector = document.querySelector('.popup__submit-button');
-// const inactiveButtonClass = document.querySelector('popup__submit-button_disabled');
-// const inputErrorClass = document.querySelector('popup__field_type_error');
-// const errorClass = document.querySelector('popup__input-error_visible');
-
 // добавления класса с ошибкой
 const showInputError = (formElement, inputElement, errorMessage, inputErrorClass, errorClass) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.add(inputErrorClass);
+  inputElement.classList.add('popup__field_type_error');
   errorElement.textContent = errorMessage;
   errorElement.classList.add(errorClass);
   };
@@ -25,13 +18,13 @@ const showInputError = (formElement, inputElement, errorMessage, inputErrorClass
 // удаления класса с ошибкой
 const hideInputError = (formElement, inputElement, inputErrorClass, errorClass) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.remove(inputErrorClass);
+  inputElement.classList.remove('popup__field_type_error');
   errorElement.classList.remove(errorClass);
   errorElement.textContent = '';
 };
 
 // проверка на валидность поля
-const checkInputValidity = (formElement, inputElement) => {
+const checkInputValidity = (formElement, inputElement, {inputErrorClass, errorClass}) => {
   if (!inputElement.validity.valid) {
     showInputError(formElement, inputElement, inputElement.validationMessage, inputErrorClass, errorClass);
   } else {
