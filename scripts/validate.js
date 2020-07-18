@@ -10,7 +10,7 @@ const validationConfig = {
 // добавления класса с ошибкой
 const showInputError = (formElement, inputElement, errorMessage, inputErrorClass, errorClass) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.add('popup__field_type_error');
+  inputElement.classList.add(inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(errorClass);
   };
@@ -18,7 +18,7 @@ const showInputError = (formElement, inputElement, errorMessage, inputErrorClass
 // удаления класса с ошибкой
 const hideInputError = (formElement, inputElement, inputErrorClass, errorClass) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.remove('popup__field_type_error');
+  inputElement.classList.remove(inputErrorClass);
   errorElement.classList.remove(errorClass);
   errorElement.textContent = '';
 };
@@ -58,7 +58,7 @@ const setEventListeners = (formElement, inputSelector, submitButtonSelector, ina
   
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
-    checkInputValidity(formElement, inputElement, inputErrorClass, errorClass);
+    checkInputValidity(formElement, inputElement, {inputErrorClass, errorClass});
     // чтобы проверять его при изменении любого из полей
     toggleButtonState(formElement, inputList, submitButtonSelector, inactiveButtonClass);
     });
@@ -78,9 +78,10 @@ const hideError = (form) => {
     error.classList.remove('popup__input-error_visable');
     error.textContent = '' 
   }) 
-} 
-// кнопки submit на попапах 
- const resetButton = (popup) => { 
+};
+
+// сброс кнопки submit на попапах при повторе
+ const resetButtonSubmit = (popup) => { 
   if (popup === popupProfile) { 
   const submitButton = document.querySelector('.popup__submit-button_profile');
   submitButton.classList.remove('popup__submit-button_disabled'); 
@@ -91,6 +92,7 @@ const hideError = (form) => {
   };
  };
 
+ //добавим всем формам слушатели
  const enableValidation = ({formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass}) => {
   const formList = Array.from(document.querySelectorAll(formSelector));
   formList.forEach((formElement) => {
@@ -101,4 +103,5 @@ const hideError = (form) => {
   });
 };
 
+//вызываем ее
  enableValidation(validationConfig);

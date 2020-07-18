@@ -46,7 +46,7 @@ const formReset = function(form) {
   function profileToggleHandler () {
     popupOpen(popupProfile);
     hideError(popupFormProfile);
-    resetButton(popupProfile);
+    resetButtonSubmit(popupProfile);
 
     if (popupProfile.classList.contains('popup_opened')) {
      nameInput.value = profileName.textContent;
@@ -106,7 +106,7 @@ popupAddButton.addEventListener('click', () => {
   popupOpen(popupAddCard);
   formReset(popupFormAddCard);
   hideError(popupFormAddCard);
-  resetButton(popupAddCard);
+  resetButtonSubmit(popupAddCard);
 });
 popupCloseAddCardButton.addEventListener('click', () => closeAddCardHandlers(popupAddCard));
 
