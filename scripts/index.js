@@ -8,6 +8,7 @@ const popupCloseAddCardButton = document.querySelector('.popup__close-button_car
 const popupEditButton = document.querySelector('.profile__edit-button');
 const popupForm = document.querySelector('.popup__form');
 const popupFormAddCard = document.querySelector('.popup__form_add-card');
+const popupFormProfile = document.querySelector('.popup__form_profile');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
 const popupAddButton = document.querySelector('.profile__add-button');
@@ -20,7 +21,7 @@ const elementTitle = document.querySelector('.element__title');
 const elementLikeButton = document.querySelector('.element__like-button');
 
 const nameInput = document.querySelector('.popup__field_type_name');
-const jobInput = document.querySelector('.popup__field_type_description');
+const jobInput = document.querySelector('.popup__field_type_job');
 const newElementNameInput = document.querySelector('.popup__field_type_name-card');
 const newelementLinkInput = document.querySelector('.popup__field_type_link');
 
@@ -36,9 +37,16 @@ const popupClose = function(popup) {
   document.removeEventListener('keydown', popupEscClose);
 }
 
+//очистка формы
+const formReset = function(form) {
+  form.reset();
+}
+
 // popupProfile handlers
   function profileToggleHandler () {
     popupOpen(popupProfile);
+    hideError(popupFormProfile);
+    resetButton(popupProfile);
 
     if (popupProfile.classList.contains('popup_opened')) {
      nameInput.value = profileName.textContent;
@@ -94,7 +102,12 @@ const closeAddCardHandlers = function () {
 }
 
 // открытие и закрытие обработчики popupAddCard
-popupAddButton.addEventListener('click', () => popupOpen(popupAddCard));
+popupAddButton.addEventListener('click', () => {
+  popupOpen(popupAddCard);
+  formReset(popupFormAddCard);
+  hideError(popupFormAddCard);
+  resetButton(popupAddCard);
+});
 popupCloseAddCardButton.addEventListener('click', () => closeAddCardHandlers(popupAddCard));
 
 // удаление карточки
