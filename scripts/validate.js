@@ -29,14 +29,14 @@ const checkInputValidity = (formElement, inputElement, {inputErrorClass, errorCl
     showInputError(formElement, inputElement, inputElement.validationMessage, inputErrorClass, errorClass);
   } else {
     hideInputError(formElement, inputElement, inputErrorClass, errorClass);
-  }
+  };
 };
 
 // проверка всех полей на валидность
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
-  })
+  });
 };
 
 // откл и вкл кнопку при вводе данных в форму
@@ -46,7 +46,7 @@ const toggleButtonState = (formElement, inputList, submitButtonSelector, inactiv
     buttonElement.classList.add(inactiveButtonClass);
   } else {
     buttonElement.classList.remove(inactiveButtonClass);
-  }
+  };
 };
 
 // добавим слушатели всем полям формы
@@ -65,19 +65,17 @@ const setEventListeners = (formElement, inputSelector, submitButtonSelector, ina
   });
 };
 
-//очистить ошибки при повторном открытии попапа
-const hideError = (form) => { 
+//удалить ошибки при повторном открытии попапа
+const deleteErrors = (form) => { 
   const inputList = Array.from(form.querySelectorAll('.popup__field')) 
-  const errorElement = Array.from(form.querySelectorAll('.popup__field-error')) 
-
+  const errorElement = Array.from(form.querySelectorAll('.popup__input-error')) 
   inputList.forEach(input => { 
     input.classList.remove('popup__field_type_error');
-  }) 
-
+  });
   errorElement.forEach(error => { 
     error.classList.remove('popup__input-error_visable');
-    error.textContent = '' 
-  }) 
+    error.textContent = '';
+  });
 };
 
 // сброс кнопки submit на попапах при повторе
