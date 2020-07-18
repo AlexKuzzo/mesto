@@ -1,14 +1,23 @@
-const formSelector = document.querySelector('.popup__form');
-const inputSelector = document.querySelector('.popup__field');
-const submitButtonSelector = document.querySelector('.popup__submit-button');
-const inactiveButtonClass = document.querySelector('popup__submit-button_disabled');
-const inputErrorClass = document.querySelector('popup__field_type_error');
-const errorClass = document.querySelector('popup__input-error_visible');
+const validationConfig = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__field',
+    submitButtonSelector: '.popup__submit-button',
+    inactiveButtonClass: 'popup__submit-button_disabled',
+    inputErrorClass: 'popup__field_type_error',
+    errorClass: 'popup__input-error_visible'
+};
+
+// const formSelector = document.querySelector('.popup__form');
+// const inputSelector = document.querySelector('.popup__field');
+// const submitButtonSelector = document.querySelector('.popup__submit-button');
+// const inactiveButtonClass = document.querySelector('popup__submit-button_disabled');
+// const inputErrorClass = document.querySelector('popup__field_type_error');
+// const errorClass = document.querySelector('popup__input-error_visible');
 
 // добавления класса с ошибкой
 const showInputError = (formElement, inputElement, errorMessage, inputErrorClass, errorClass) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.add('popup__field_type_error');
+  inputElement.classList.add(inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(errorClass);
   };
@@ -77,17 +86,7 @@ const hideError = (form) => {
     error.textContent = '' 
   }) 
 } 
-
-const enableValidation = ({formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass}) => {
-  const formList = Array.from(document.querySelectorAll(formSelector));
-  formList.forEach((formElement) => {
-    formElement.addEventListener('submit', function (evt) {
-      evt.preventDefault();
-    });
-    setEventListeners(formElement, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass);
-  });
-};
-
+// кнопки submit на попапах 
  const resetButton = (popup) => { 
   if (popup === popupProfile) { 
   const submitButton = document.querySelector('.popup__submit-button_profile');
@@ -99,11 +98,14 @@ const enableValidation = ({formSelector, inputSelector, submitButtonSelector, in
   };
  };
 
- enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__field',
-  submitButtonSelector: '.popup__submit-button',
-  inactiveButtonClass: 'popup__submit-button_disabled',
-  inputErrorClass: 'popup__field_type_error',
-  errorClass: 'popup__input-error_visible'
-});
+ const enableValidation = ({formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass}) => {
+  const formList = Array.from(document.querySelectorAll(formSelector));
+  formList.forEach((formElement) => {
+    formElement.addEventListener('submit', function (evt) {
+      evt.preventDefault();
+    });
+    setEventListeners(formElement, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass);
+  });
+};
+
+ enableValidation(validationConfig);
