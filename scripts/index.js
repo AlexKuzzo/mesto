@@ -1,3 +1,5 @@
+// import {validationConfig, FormValidator} from './FormValidator.js';
+
 const popup = document.querySelector('.popup');
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupAddCard = document.querySelector('.popup_type_add-card');
