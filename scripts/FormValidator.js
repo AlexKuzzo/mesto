@@ -16,7 +16,7 @@ class FormValidator {
     this._inactiveButtonClass = valConfig.inactiveButtonClass;
     this._inputErrorClass = valConfig.inputErrorClass;
     this._errorClass = valConfig.errorClass;
-    this._formElement = valConfig.formElement; //форма
+    this._formElement = formElement; //форма
   }
 
 
@@ -57,68 +57,39 @@ class FormValidator {
 
 
   // откл и вкл кнопку при вводе данных в форму
-  _toggleButtonState (inputList, buttonElement) {
-    const buttonElementNew = this._formElement.querySelector(this._submitButtonSelector);
+  _toggleButtonState (inputList) {
+    const buttonElement = this._formElement.querySelector(this._submitButtonSelector);
     if(this._hasInvalidInput(inputList)) {
-      buttonElementNew.classList.add(this._inactiveButtonClass);
+      buttonElement.classList.add(this._inactiveButtonClass);
     } else {
-      buttonElementNew.classList.remove(this._inactiveButtonClass);
+      buttonElement.classList.remove(this._inactiveButtonClass);
     };
   };
 
   // добавим слушатели всем полям формы
   _setEventListeners () {
     const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+    // const buttonElement = this.formElement.querySelector(this_.submitButtonSelector);
   
     // чтобы проверить состояние кнопки в самом начале
-    this._toggleButtonState(formElement, inputList, submitButtonSelector, inactiveButtonClass);
+    this._toggleButtonState(inputList);
   
     inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
       this._checkInputValidity(inputElement);
       // чтобы проверять его при изменении любого из полей
-      this._toggleButtonState(inputList, buttonElement);
+      this._toggleButtonState(inputList);
       });
     });
   };
-
-
-  // //удалить ошибки при повторном открытии попапа
-  // const deleteErrors = (form) => { 
-  //   const inputList = Array.from(form.querySelectorAll('.popup__field')) 
-  //   const errorElement = Array.from(form.querySelectorAll('.popup__input-error')) 
-  //   inputList.forEach(input => { 
-  //     input.classList.remove('popup__field_type_error');
-  //   });
-  //   errorElement.forEach(error => { 
-  //     error.classList.remove('popup__input-error_visable');
-  //     error.textContent = '';
-  //   });
-  // };
-
-  // // сброс кнопки submit на попапах при повторе
-  //  const resetButtonSubmit = (popup) => { 
-  //   if (popup === popupProfile) { 
-  //   const submitButton = document.querySelector('.popup__submit-button_profile');
-  //   submitButton.classList.remove('popup__submit-button_disabled'); 
-  //   } 
-  //   else { 
-  //   const submitButton = document.querySelector('.popup__submit-button_card'); 
-  //   submitButton.classList.add('popup__submit-button_disabled'); 
-  //   };
-  //  };
 
   //добавим всем формам слушатели
   enableValidation () {
     this._formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
-    })
+    });
 
     this._setEventListeners();
   }
   
 }
-
-// //вызываем ее
-// enableValidation(validationConfig);
-  

@@ -1,4 +1,4 @@
-export {popupOpen, popupClose, resetButtonSubmit};
+export {popupOpen, popupClose, formReset};
 
 // открытие попапа
 const popupOpen = function(popup) {
@@ -20,14 +20,7 @@ const popupEscClose = function (evt) {
     };
   };
 
-// сброс кнопки submit на попапах при повторе
-const resetButtonSubmit = (popup) => { 
-    if (popup === popupProfile) { 
-    const submitButton = document.querySelector('.popup__submit-button_profile');
-    submitButton.classList.remove('popup__submit-button_disabled'); 
-    } 
-    else { 
-    const submitButton = document.querySelector('.popup__submit-button_card'); 
-    submitButton.classList.add('popup__submit-button_disabled'); 
-    };
-   };
+//очистка формы
+const formReset = function (form) {
+  form.reset();
+};
