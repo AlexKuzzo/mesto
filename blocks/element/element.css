@@ -1,3 +1,4 @@
+@import url(./__list/element__list.css);
 @import url(./__item/element__item.css);
 @import url(./__image/element__image.css);
 @import url(./__title/element__title.css);
@@ -13,9 +14,9 @@
   max-width: 282px;
   background-color: #ffffff;
   margin: 0 auto;
-  overflow: hidden;
   list-style-type: none;
   padding: 0;
   border-radius: 10px;
   position: relative;
+  overflow: hidden;
 }

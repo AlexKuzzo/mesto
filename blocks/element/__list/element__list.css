@@ -1,0 +1,9 @@
+.element__list {
+  display: flex;
+  width: 282px;
+  height: 282px;
+  flex-direction: column;
+  position: relative;
+  margin: 0;
+  background: #777575;
+}

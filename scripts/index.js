@@ -1,8 +1,7 @@
 import {Card} from './Card.js';
-import {validationConfig, FormValidator} from './FormValidator.js'
+import {validationConfig, FormValidator, resetButtonSubmit, deleteErrors} from './FormValidator.js'
 import {popupOpen, popupClose, formReset} from './utils.js';
 import {initialCards} from './initialCards.js';
-
 
 const popup = document.querySelector('.popup');
 const popupProfile = document.querySelector('.popup_type_profile');
@@ -67,15 +66,9 @@ initialCards.forEach((item) => {
     popupClose(popupProfile); 
   };
 
-  // закрытие ProfileHandlers
-  const closeProfileHandlers = function () {
-  popupClose(popupProfile);
-  
-};
-
 //слушатели popupProfile
   popupEditButton.addEventListener('click', profileToggleHandler);
-  popupCloseButton.addEventListener('click', closeProfileHandlers);
+  popupCloseButton.addEventListener('click', () => popupClose(popupProfile));
   popupForm.addEventListener('submit', profileFormSubmitHandler);
 
 // закрытие попапа по фону 
@@ -91,15 +84,6 @@ const popupBackgroundClose = function(event) {
   popupAddCard.addEventListener('click', popupBackgroundClose);
   popupPhoto.addEventListener('click', popupBackgroundClose);
 
-// создать лайки
-const like = function(evt) {
-  evt.currentTarget.classList.toggle('element__like-button_active');
-}
-// закрытие AddCardHandlers
-const closeAddCardHandlers = function () {
-  popupClose(popupAddCard);
-};
-
 // открытие и закрытие обработчики popupAddCard
 popupAddButton.addEventListener('click', () => {
   popupOpen(popupAddCard);
@@ -107,27 +91,12 @@ popupAddButton.addEventListener('click', () => {
   deleteErrors(popupFormAddCard);
   resetButtonSubmit(popupAddCard);
 });
-popupCloseAddCardButton.addEventListener('click', () => closeAddCardHandlers(popupAddCard));
 
-// закрытие PhotoHandlers
-const closePhotoHandlers = function () {
-  popupClose(popupPhoto);
-}
+// закрытие popupAddCard
+popupCloseAddCardButton.addEventListener('click', () => popupClose(popupAddCard));
 
 // закрытие popupPhoto
-popupPhotoCloseButton.addEventListener('click', () => closePhotoHandlers(popupPhoto));
-
-// сброс кнопки submit на попапах при повторе уже заполненого поля в попапе profile
-   const resetButtonSubmit = (popup) => { 
-    if (popup === popupProfile) { 
-    const submitButton = document.querySelector('.popup__submit-button_profile');
-    submitButton.classList.remove('popup__submit-button_disabled'); 
-    } 
-    else { 
-    const submitButton = document.querySelector('.popup__submit-button_card'); 
-    submitButton.classList.add('popup__submit-button_disabled'); 
-    };
-   };
+popupPhotoCloseButton.addEventListener('click', () => popupClose(popupPhoto));
 
 // добавить новую карточку
 const elementSubmitHandler = (evt, cardName, cardImage) => {
@@ -141,16 +110,3 @@ const elementSubmitHandler = (evt, cardName, cardImage) => {
 
 // слушатель на submit card
 popupFormAddCard.addEventListener('submit', (evt) => elementSubmitHandler(evt, newElementNameInput, newelementLinkInput));
-
-//удалить ошибки при повторном открытии попапа
-const deleteErrors = (form) => { 
-  const inputList = Array.from(form.querySelectorAll('.popup__field')) 
-  const errorElement = Array.from(form.querySelectorAll('.popup__input-error')) 
-  inputList.forEach(input => { 
-    input.classList.remove('popup__field_type_error');
-  });
-  errorElement.forEach(error => { 
-    error.classList.remove('popup__input-error_visable');
-    error.textContent = '';
-  });
-};

@@ -1,5 +1,5 @@
 
-import {popupOpen, popupClose} from './utils.js';
+import {popupOpen, popupClose, photoImage, photoName, popupPhoto} from './utils.js';
 
 export class Card {
   constructor(name, link, cardSelector) {
@@ -23,10 +23,6 @@ export class Card {
       this._handleOpenImage();
     });
 
-    document.querySelector('.popup__close-button').addEventListener('click', () => {
-      this._handleCloseImage();
-    });
-
     this._element.querySelector('.element__delete-button').addEventListener('click', () => {
       this._handleDeleteCard();
     });
@@ -37,20 +33,11 @@ export class Card {
   }
 
   _handleOpenImage(name, link) {
-    const photoImage = document.querySelector('.popup__photo');
-    const photoName = document.querySelector('.popup__photo-name');
-    const popupPhoto = document.querySelector('.popup_type_photo');
-
     photoImage.src = this._link;
     photoName.textContent = this._name;
     photoImage.alt = this._name;
     
     popupOpen(popupPhoto);
-  }
-
-  _handleCloseImage() {
-    const popupPhoto = document.querySelector('.popup_type_photo');
-    popupClose(popupPhoto);
   }
 
   _handleLikeButton() {
@@ -64,10 +51,11 @@ export class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
+    const elementImage = this._element.querySelector('.element__image');
 
-    this._element.querySelector('.element__image').src = this._link;
+    elementImage.src = this._link;
     this._element.querySelector('.element__title').textContent = this._name;
-    this._element.querySelector('.element__image').alt = this._name;
+    elementImage.alt = this._name;
     
     return this._element;
   }

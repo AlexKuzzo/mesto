@@ -1,4 +1,8 @@
-export {popupOpen, popupClose, formReset};
+export {popupOpen, popupClose, formReset, photoImage, photoName, popupPhoto};
+
+const photoImage = document.querySelector('.popup__photo');
+const photoName = document.querySelector('.popup__photo-name');
+const popupPhoto = document.querySelector('.popup_type_photo');
 
 // открытие попапа
 const popupOpen = function(popup) {

@@ -1,4 +1,4 @@
-export {validationConfig, FormValidator};
+export {validationConfig, FormValidator, resetButtonSubmit, deleteErrors};
 
 const validationConfig = {
     formSelector: '.popup__form',
@@ -18,7 +18,6 @@ class FormValidator {
     this._errorClass = valConfig.errorClass;
     this._formElement = formElement; //форма
   }
-
 
   // добавления класса с ошибкой
   _showInputError(inputElement, errorMessage) {
@@ -55,14 +54,15 @@ class FormValidator {
     });
   };
 
-
   // откл и вкл кнопку при вводе данных в форму
   _toggleButtonState (inputList) {
     const buttonElement = this._formElement.querySelector(this._submitButtonSelector);
     if(this._hasInvalidInput(inputList)) {
       buttonElement.classList.add(this._inactiveButtonClass);
+      buttonElement.setAttribute('disabled', 'true');
     } else {
       buttonElement.classList.remove(this._inactiveButtonClass);
+      buttonElement.removeAttribute('disabled');
     };
   };
 
@@ -91,5 +91,30 @@ class FormValidator {
 
     this._setEventListeners();
   }
-  
 }
+
+// сброс кнопки submit на попапах при повторе уже заполненого поля в попапе profile
+const resetButtonSubmit = (popup) => { 
+  const popupProfile = document.querySelector('.popup_type_profile');
+  if (popup === popupProfile) { 
+  const submitButton = document.querySelector('.popup__submit-button_profile');
+  submitButton.classList.remove('popup__submit-button_disabled'); 
+  } 
+  else { 
+  const submitButton = document.querySelector('.popup__submit-button_card'); 
+  submitButton.classList.add('popup__submit-button_disabled'); 
+  };
+};
+
+//удалить ошибки при повторном открытии попапа
+const deleteErrors = (form) => { 
+  const inputList = Array.from(form.querySelectorAll('.popup__field')) 
+  const errorElement = Array.from(form.querySelectorAll('.popup__input-error')) 
+  inputList.forEach(input => { 
+    input.classList.remove('popup__field_type_error');
+  });
+  errorElement.forEach(error => { 
+    error.classList.remove('popup__input-error_visable');
+    error.textContent = '';
+  });
+};
