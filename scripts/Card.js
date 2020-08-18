@@ -52,9 +52,10 @@ export class Card {
     this._element = this._getTemplate();
     this._setEventListeners();
     const elementImage = this._element.querySelector('.element__image');
+    const elementName = this._element.querySelector('.element__title');
 
     elementImage.src = this._link;
-    this._element.querySelector('.element__title').textContent = this._name;
+    elementName.textContent = this._name;
     elementImage.alt = this._name;
     
     return this._element;
