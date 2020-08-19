@@ -7,11 +7,11 @@ export default class PopupWithImage extends Popup {
     this._namePhotoInPopup = namePhotoInPopup;
   }
 
-  open(elementImage, elementName) {
+  open(photoImage, photoName) {
     super.open();
     
-    this._photoInPopup.src = elementImage.src;
-    this._photoInPopup.alt = elementImage.alt;
-    this._namePhotoInPopup.textContent = elementName.textContent;
+    this._photoInPopup.src = photoImage.src;
+    this._photoInPopup.alt = photoImage.alt;
+    this._namePhotoInPopup.textContent = photoName.textContent;
   }
 }

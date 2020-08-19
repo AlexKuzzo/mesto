@@ -1,4 +1,4 @@
-export {validationConfig, FormValidator, resetButtonSubmit, deleteErrors};
+export {validationConfig, FormValidator, resetButtonSubmit};
 
 const validationConfig = {
     formSelector: '.popup__form',
@@ -6,7 +6,8 @@ const validationConfig = {
     submitButtonSelector: '.popup__submit-button',
     inactiveButtonClass: 'popup__submit-button_disabled',
     inputErrorClass: 'popup__field_type_error',
-    errorClass: 'popup__input-error_visible'
+    errorClass: 'popup__input-error_visible',
+    errorSelector: '.popup__input-error'
 };
 
 class FormValidator {
@@ -17,6 +18,7 @@ class FormValidator {
     this._inputErrorClass = valConfig.inputErrorClass;
     this._errorClass = valConfig.errorClass;
     this._formElement = formElement; //форма
+    this._errorSelector = valConfig.errorSelector;
   }
 
   // добавления класса с ошибкой
@@ -91,6 +93,19 @@ class FormValidator {
 
     this._setEventListeners();
   }
+
+  //удалить ошибки при повторном открытии попапа
+  deleteErrors() { 
+    const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector)) 
+    const errorElement = Array.from(this._formElement.querySelectorAll(this._errorSelector)) 
+    inputList.forEach(input => { 
+      input.classList.remove(this._inputErrorClass);
+    });
+    errorElement.forEach(error => { 
+      error.classList.remove(this._errorClass);
+      error.textContent = '';
+    });
+  };
 }
 
 // сброс кнопки submit на попапах при повторе уже заполненого поля в попапе profile
@@ -104,17 +119,4 @@ const resetButtonSubmit = (popup) => {
   const submitButton = document.querySelector('.popup__submit-button_card'); 
   submitButton.classList.add('popup__submit-button_disabled'); 
   };
-};
-
-//удалить ошибки при повторном открытии попапа
-const deleteErrors = (form) => { 
-  const inputList = Array.from(form.querySelectorAll('.popup__field')) 
-  const errorElement = Array.from(form.querySelectorAll('.popup__input-error')) 
-  inputList.forEach(input => { 
-    input.classList.remove('popup__field_type_error');
-  });
-  errorElement.forEach(error => { 
-    error.classList.remove('popup__input-error_visable');
-    error.textContent = '';
-  });
 };

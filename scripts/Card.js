@@ -1,11 +1,13 @@
+const photoImage = document.querySelector('.popup__photo');
+const photoName = document.querySelector('.popup__photo-name');
+const popupPhoto = document.querySelector('.popup_type_photo');
 
-import {popupOpen, popupClose, photoImage, photoName, popupPhoto} from './utils.js';
-
-export class Card {
-  constructor(name, link, cardSelector) {
+export default class Card {
+  constructor(name, link, cardSelector, openPopup) {
     this._name = name;
     this._link = link;
     this._cardSelector = cardSelector;
+    this._openPopup = openPopup;
   }
 
   _getTemplate() {
