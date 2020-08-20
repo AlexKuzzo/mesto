@@ -1,5 +1,5 @@
 import Card from './Card.js';
-import {validationConfig, FormValidator, resetButtonSubmit} from './FormValidator.js'
+import {validationConfig, FormValidator} from './FormValidator.js'
 import Section from './Section.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
@@ -66,28 +66,27 @@ const handleCardClick = function (photoImage, photoName) {
   popupWithImage.setEventListeners();
 }
 
-
-
 //отрисовка элементов на странице
 const cardsList = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    const newElementCard = new Card (item, cardsTemplate, handleCardClick);
-    const templateElement = newElementCard.generateCard();
+    items: initialCards,
+    renderer: (photo) => {
+      const newElementCard = new Card (photo, cardsTemplate, handleCardClick);
+      const templateElement = newElementCard.generateCard();
 
-    cardsList.addItem(templateElement);
+      cardsList.addItem(templateElement);
+    },
   },
   cards
-});
+);
 
 cardsList.renderItems();
 
-// карточки
-initialCards.forEach((item) => {
-  const card = new Card(item.name, item.link, '.cards-template');
-  const cardElement = card.generateCard();
-  cards.append(cardElement);
-});
+// // карточки
+// initialCards.forEach((photo) => {
+//   const card = new Card(photo.name, photo.link, '.cards-template');
+//   const cardElement = card.generateCard();
+//   cards.append(cardElement);
+// });
 
 // валидация
 const editProfileFormValidator = new FormValidator(validationConfig, popupFormProfile);
@@ -96,6 +95,15 @@ const addCardFormValidator = new FormValidator(validationConfig, popupFormAddCar
 editProfileFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 
+// обработчики 
+popupEditButton.addEventListener('click', () => {
+  const userInfo = user.getUserInfo();
+  nameInput.value = userInfo.name;
+  jobInput.value = userInfo.job;
+  profilePopup.open();
+  editProfileFormValidator.deleteErrors();
+  editProfileFormValidator.resetButtonSubmit();
+})
 
 // // popupProfile handlers
 //   function profileToggleHandler () {
@@ -137,16 +145,7 @@ addCardFormValidator.enableValidation();
 //   popupAddCard.addEventListener('click', popupBackgroundClose);
 //   popupPhoto.addEventListener('click', popupBackgroundClose);
 
-// обработчики 
-popupEditButton.addEventListener('click', () => {
-  const userInfo = user.getUserInfo();
-  nameInput.value = userInfo.name;
-  jobInput.value = userInfo.job;
-  profilePopup.open();
-  editProfileFormValidator.deleteErrors();
-  editProfileFormValidator
 
-})
 
 // popupAddButton.addEventListener('click', () => {
 //   popupOpen(popupAddCard);

@@ -3,26 +3,27 @@ const photoName = document.querySelector('.popup__photo-name');
 const popupPhoto = document.querySelector('.popup_type_photo');
 
 export default class Card {
-  constructor(name, link, cardSelector, openPopup) {
-    this._name = name;
-    this._link = link;
+  constructor(photo, cardSelector, openPopup) {
+    this._name = photo.name;
+    this._link = photo.link;
     this._cardSelector = cardSelector;
     this._openPopup = openPopup;
   }
 
   _getTemplate() {
-    const cardElement = document
-    .querySelector(this._cardSelector)
-    .content
-    .querySelector('.element')
-    .cloneNode(true);
+    // const cardElement = document
+    // .querySelector(this._cardSelector)
+    // .content
+    // .querySelector('.element')
+    // .cloneNode(true);
 
-    return cardElement;
+    // return cardElement;
+    return this._cardSelector.cloneNode(true);
   }
 
-  _setEventListeners() {
+  _setEventListeners(elementImage, elementName) {
     this._element.querySelector('.element__image').addEventListener('click', () => {
-      this._handleOpenImage();
+      this._openPopup(elementImage, elementName);
     });
 
     this._element.querySelector('.element__delete-button').addEventListener('click', () => {
@@ -34,13 +35,13 @@ export default class Card {
     });
   }
 
-  _handleOpenImage(name, link) {
-    photoImage.src = this._link;
-    photoName.textContent = this._name;
-    photoImage.alt = this._name;
+  // _handleOpenImage(name, link) {
+  //   photoImage.src = this._link;
+  //   photoName.textContent = this._name;
+  //   photoImage.alt = this._name;
     
-    popupOpen(popupPhoto);
-  }
+  //   popupOpen(popupPhoto);
+  // }
 
   _handleLikeButton() {
     this._element.querySelector('.element__like-button').classList.toggle('element__like-button_active');
@@ -52,9 +53,9 @@ export default class Card {
 
   generateCard() {
     this._element = this._getTemplate();
-    this._setEventListeners();
     const elementImage = this._element.querySelector('.element__image');
     const elementName = this._element.querySelector('.element__title');
+    this._setEventListeners(elementImage, elementName);
 
     elementImage.src = this._link;
     elementName.textContent = this._name;

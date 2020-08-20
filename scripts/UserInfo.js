@@ -1,7 +1,7 @@
 export default class UserInfo {
   constructor({name, job}) {
-    this.name = name;
-    this.job = job;
+    this._name = name;
+    this._job = job;
   }
 
   //метод getUserInfo, который возвращает объект с данными пользователя
