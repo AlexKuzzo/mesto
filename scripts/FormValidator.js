@@ -7,8 +7,7 @@ const validationConfig = {
     inactiveButtonClass: 'popup__submit-button_disabled',
     inputErrorClass: 'popup__field_type_error',
     errorClass: 'popup__input-error_visible',
-    errorSelector: '.popup__input-error',
-    buttonSubmitElement: '.popup__submit-button_profile'
+    errorSelector: '.popup__input-error'
 };
 
 class FormValidator {
@@ -20,7 +19,6 @@ class FormValidator {
     this._errorClass = valConfig.errorClass;
     this._formElement = formElement; //форма
     this._errorSelector = valConfig.errorSelector;
-    this._buttonSubmitElement = valConfig.buttonSubmitElement;
   }
 
   // добавления класса с ошибкой
@@ -73,7 +71,6 @@ class FormValidator {
   // добавим слушатели всем полям формы
   _setEventListeners () {
     const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-    // const buttonElement = this.formElement.querySelector(this_.submitButtonSelector);
   
     // чтобы проверить состояние кнопки в самом начале
     this._toggleButtonState(inputList);
@@ -109,37 +106,24 @@ class FormValidator {
     });
   };
 
+  // кнопка submit активна
+  _enableSubmit() {
+    this._buttonElement.classList.remove(this._inactiveButtonClass);
+  }
+
+  //кнопка submit неактивна
+  _desableSubmit() {
+    this._buttonElement.classList.add(this._inactiveButtonClass);
+  }
   
   // сброс кнопки submit при повторе уже заполненого поля в попапе profile
   resetButtonSubmit() {
-    // const buttonSubmitElement = this._buttonSubmitElement.document.querySelector('.popup__submit-button_profile');
-    if (this._buttonSubmitElement) {
+    this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
+    if (this._buttonElement.classList.contains('popup__submit-button_profile')) {
       this._enableSubmit();
     }
     else { 
       this._desableSubmit();
     };
   };
-
-  _desableSubmit() {
-    this._buttonSubbmitElement.classList.add(this._inactiveButtonClass);
-  }
-
-  _enableSubmit() {
-    this._buttonElement.classList.remove(this._inactiveButtonClass);
-  }
-
 }
-
-// // сброс кнопки submit на попапах при повторе уже заполненого поля в попапе profile
-// const resetButtonSubmit = (popup) => { 
-//   const popupProfile = document.querySelector('.popup_type_profile');
-//   if (popup === popupProfile) { 
-//   const submitButton = document.querySelector('.popup__submit-button_profile');
-//   submitButton.classList.remove('popup__submit-button_disabled'); 
-//   } 
-//   else { 
-//   const submitButton = document.querySelector('.popup__submit-button_card'); 
-//   submitButton.classList.add('popup__submit-button_disabled'); 
-//   };
-// };
