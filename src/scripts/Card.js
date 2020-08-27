@@ -1,7 +1,3 @@
-// const photoImage = document.querySelector('.popup__photo');
-// const photoName = document.querySelector('.popup__photo-name');
-// const popupPhoto = document.querySelector('.popup_type_photo');
-
 export default class Card {
   constructor(photo, cardSelector, openPopup) {
     this._name = photo.name;
@@ -12,10 +8,6 @@ export default class Card {
 
   _getTemplate() {
     return this._cardSelector.cloneNode(true);
-  }
-
-  _handleLikeButton(evt) {
-    evt.target.classList.toggle('element__like-button_active');
   }
 
   generateCard() {
@@ -31,8 +23,13 @@ export default class Card {
     return this._element;
   }
 
+  _handleLikeButton(evt) {
+    evt.target.classList.toggle('element__like-button_active');
+  }
+
   _handleDeleteCard() {
-    this._element.remove()
+    this._cardDelete = document.querySelector('.element');
+    this._cardDelete.remove();
   }
 
   _setEventListeners(elementImage, elementName) {

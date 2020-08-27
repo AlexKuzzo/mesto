@@ -49,6 +49,7 @@ addCardPopup.setEventListeners();
 
 // попап фото
 const popupWithImage = new PopupWithImage(popupPhoto, photoImage, photoName);
+
 const handleCardClick = function (photoImage, photoName) {
   popupWithImage.open(photoImage, photoName);
   popupWithImage.setEventListeners();
