@@ -7,7 +7,13 @@ export default class Card {
   }
 
   _getTemplate() {
-    return this._cardSelector.cloneNode(true);
+    const cardElement = document
+      .querySelector(this._cardSelector)
+      .content
+      .querySelector('.element')
+      .cloneNode(true);
+    
+      return cardElement;
   }
 
   generateCard() {
@@ -28,8 +34,7 @@ export default class Card {
   }
 
   _handleDeleteCard() {
-    this._cardDelete = document.querySelector('.element');
-    this._cardDelete.remove();
+    this._element.remove()
   }
 
   _setEventListeners(elementImage, elementName) {
