@@ -1,4 +1,5 @@
 import '../pages/index.css';
+import Api from './Api.js';
 import Card from './Card.js';
 import {validationConfig, FormValidator} from './FormValidator.js';
 import Section from './Section.js';
@@ -6,9 +7,17 @@ import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
 import UserInfo from './UserInfo.js';
 import {initialCards} from './initialCards.js';
-import {popup, popupProfile, popupAddCard, popupPhoto, cards, popupEditButton, popupFormAddCard,
-  popupFormProfile, profileName, profileJob, popupAddButton, photoImage, photoName, nameInput, jobInput} from '../utils/constants.js'
+import {popup, popupProfile, popupAddCard, popupPhoto, popupDelete, popupAvatar, cards, popupEditButton, popupFormAddCard,
+popupFormProfile, profileName, profileJob, popupAddButton, photoImage, photoName, nameInput, jobInput,
+popupSubmitButtonProfile, popupSubmitButtonCards, popupSubmitButtonAvatar, avatarEditButton} from '../utils/constants.js'
 
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-14',
+  headers: {
+    authorization: '9fd6b558-8922-4eb3-a680-6293b0e020a6',
+    'Content-Type': 'application/json'
+  }
+});
 
 function newCreateCard (photo, cardsTemplate) {
   const newElementCard = new Card(photo, cardsTemplate, handleCardClick);
@@ -75,3 +84,8 @@ popupAddButton.addEventListener('click', () => {
   addCardFormValidator.deleteErrors();
   addCardFormValidator.resetButtonSubmit();
 })
+
+// обработчик на аватар
+// avatarEditButton.addEventListener('click', () => {
+//   popupAvatar.open()
+// })

@@ -4,7 +4,9 @@
   position: relative;
   outline: none;
   border: none;
+  box-shadow: none;
   cursor: pointer;
+  padding: 0;
 }
 
 .profile__avatar-button:before {
@@ -14,15 +16,15 @@
   right: 0;
   bottom: 0;
   background-color: rgb(0, 0, 0);
-  content: '';
   border-radius: 40%;
   object-fit: contain;
   opacity: 0;
   transition: opacity 0,7s ease-in-out 0s;
+  content: '';
 }
 
-.profile__avatar-button:hover:after {
-  opacity: 0,8;
+.profile__avatar-button:hover:before {
+  opacity: 0.8;
 }
 
 .profile__avatar-button:after {
