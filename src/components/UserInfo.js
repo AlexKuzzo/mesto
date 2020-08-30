@@ -19,6 +19,9 @@ export default class UserInfo {
   }
 
   setAvatar(avatar) {
-    document.querySelector('.profile__avatar').style.backgroundImage = 'url('+avatar+')';
+    // document.querySelector('.profile__avatar').style.backgroundImage = 'url('+avatar+')';
+    if (avatar) {
+      document.querySelector('.profile__avatar').src = avatar
+    }
   }
 }
