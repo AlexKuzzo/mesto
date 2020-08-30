@@ -4,7 +4,7 @@ const popupAddCard = document.querySelector('.popup_type_add-card');
 const popupPhoto = document.querySelector('.popup_type_photo');
 const popupDelete = document.querySelector('.popup_type_delete-card');
 const popupAvatar = document.querySelector('.popup_type_avatar');
-const cards = document.querySelector('.elements');
+const cardsAll = document.querySelector('.elements');
 const popupEditButton = document.querySelector('.profile__edit-button');
 const popupFormAddCard = document.querySelector('.popup__form_add-card');
 const popupFormProfile = document.querySelector('.popup__form_profile');
@@ -21,6 +21,6 @@ const popupSubmitButtonAvatar = document.querySelector('.popup__submit-button_av
 const avatarEditButton = document.querySelector('.profile__avatar-button');
 
 
-export {popup, popupProfile, popupAddCard, popupPhoto, popupDelete, popupAvatar, cards, popupEditButton, popupFormAddCard,
+export {popup, popupProfile, popupAddCard, popupPhoto, popupDelete, popupAvatar, cardsAll, popupEditButton, popupFormAddCard,
 popupFormProfile, profileName, profileJob, popupAddButton, photoImage, photoName, nameInput, jobInput,
 popupSubmitButtonProfile, popupSubmitButtonCards, popupSubmitButtonAvatar, avatarEditButton}
