@@ -10,7 +10,7 @@ import UserInfo from './UserInfo.js';
 import {initialCards} from './initialCards.js';
 import {popup, popupProfile, popupAddCard, popupPhoto, popupDelete, popupAvatar, cardsAll, popupEditButton, popupFormAddCard,
 popupFormProfile, profileName, profileJob, popupAddButton, photoImage, photoName, nameInput, jobInput,
-popupSubmitButtonProfile, popupSubmitButtonCards, popupSubmitButtonAvatar, avatarEditButton} from '../utils/constants.js'
+popupSubmitButtonProfile, popupSubmitButtonCards, popupSubmitButtonAvatar, avatarEditButton, cardsTemplate} from '../utils/constants.js'
 import {waitLoading} from '../utils/utils.js'
 
 const api = new Api({
@@ -46,7 +46,7 @@ const handleUserInfo = function (userData) {
   api.patchUserInfo(userData.name, userData.about)
     .then((info) => {
       user.setUserInfo(info)
-      infoPopup.close()
+      profilePopup.close()
     })
     .catch((err) => {
       console.log(err)
@@ -88,11 +88,19 @@ const addNewCard = function (card) {
     })
 }
 
-function newCreateCard (photo, cardsTemplate) {
-  const newElementCard = new Card(photo, cardsTemplate, handleCardClick, '.cards-template', api.userInfo._id, api);
+function newCreateCard (photo) {
+  const newElementCard = new Card(photo, cardsTemplate, handleCardClick, handleClickDeleteCard, api.userInfo._id, api);
   // const templateElement = newElementCard.generateCard();
   return newElementCard.generateCard();
   // cardsList.addItem(templateElement);
+}
+
+//удаление карты
+const popupDeleteCard = new PopupWithDeleteCard(popupDelete, api);
+
+const handleClickDeleteCard = function(cardId) {
+  popupDeleteCard.open();
+  popupDeleteCard.setEventListeners(cardId);
 }
 
 const popupWithImage = new PopupWithImage(popupPhoto, photoImage, photoName);

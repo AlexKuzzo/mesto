@@ -19,8 +19,9 @@ const popupSubmitButtonProfile = document.querySelector('.popup__submit-button_p
 const popupSubmitButtonCards = document.querySelector('.popup__submit-button_card');
 const popupSubmitButtonAvatar = document.querySelector('.popup__submit-button_avatar');
 const avatarEditButton = document.querySelector('.profile__avatar-button');
+const cardsTemplate = document.querySelector('.cards-template').content;
 
 
 export {popup, popupProfile, popupAddCard, popupPhoto, popupDelete, popupAvatar, cardsAll, popupEditButton, popupFormAddCard,
 popupFormProfile, profileName, profileJob, popupAddButton, photoImage, photoName, nameInput, jobInput,
-popupSubmitButtonProfile, popupSubmitButtonCards, popupSubmitButtonAvatar, avatarEditButton}
+popupSubmitButtonProfile, popupSubmitButtonCards, popupSubmitButtonAvatar, avatarEditButton, cardsTemplate}

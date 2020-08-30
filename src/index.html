@@ -13,9 +13,9 @@
     
     <main class="content">
       <section class="profile">
-        <button class="profile__avatar-button">
-          <img src="images/avatar.jpg" alt="аватар" class="profile__avatar">
-        </button>
+        <div alt="аватар" class="profile__avatar">
+        <button class="profile__avatar-button"></button>
+        </div>
         <div class="profile__info">
           <div class="profile__list">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -41,7 +41,7 @@
           <span class="popup__input-error" id="name-input-error"></span>
         </label>
         <label class="popup__field-container">
-          <input name="job" id="job-input" type="text" minlength="2" maxlength="200" required class="popup__field popup__field_type_job" placeholder="О себе">
+          <input name="about" id="job-input" type="text" minlength="2" maxlength="200" required class="popup__field popup__field_type_job" placeholder="О себе">
           <span class="popup__input-error" id="job-input-error"></span>
         </label>
         <button class="popup__submit-button popup__submit-button_profile" type="submit">Сохранить</button>

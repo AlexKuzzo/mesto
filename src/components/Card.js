@@ -13,13 +13,14 @@ export default class Card {
   }
 
   _getTemplate() {
-    const cardElement = document
-      .querySelector(this._cardSelector)
-      .content
-      .querySelector('.element')
-      .cloneNode(true);
+    // const cardElement = document
+    //   .querySelector(this._cardSelector)
+    //   .content
+    //   .querySelector('.element')
+    //   .cloneNode(true);
     
-      return cardElement;
+    //   return cardElement;
+    return  this._cardSelector.cloneNode(true)
   }
 
   generateCard() {
@@ -35,8 +36,8 @@ export default class Card {
     elementCard.id = this._id;
 
     // счетчик лайков
-    if (this._like.length >= 1) {
-      this._scoreLikes.textContent = this._like.length
+    if (this._like.length >=1 ) {
+      this._scoreLikes.textContent = this._like.length;
     }
     
     //перебор лайков для поиска владельца сайта
@@ -76,13 +77,13 @@ export default class Card {
           evt.target.classList.remove('element__like-button_active');
 
           // если количество лайков больше 0
-          if (res.like.length >= 1) {
+          if (res.like.length >=1 ) {
             //вывести количество лайков
             this._scoreLikes.textContent = res.like.length;
           }
           else {
             // если количество лайков 0 то убрать цифру
-            this._scoreLikes.textContent = "";
+            this._scoreLikes.textContent = '';
           }
         })
         .catch(err => {
@@ -117,11 +118,7 @@ export default class Card {
     this._element.querySelector('.element__image').addEventListener('click', () => {
       this._openPopupByPhoto(elementImage, elementName);
     });
-
-    // this._element.querySelector('.element__delete-button').addEventListener('click', () => {
-    //   this._handleDeleteCard();
-    // });
-
+    
     this._element.querySelector('.element__like-button').addEventListener('click', (evt) => {
       this._likes(evt)
     });
