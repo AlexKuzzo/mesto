@@ -45,8 +45,8 @@ const handleUserInfo = function (userData) {
   waitLoading(true, popupSubmitButtonProfile)
   api.patchUserInfo(userData.name, userData.about)
     .then((info) => {
-      user.setUserInfo(info)
-      profilePopup.close()
+      user.setUserInfo(info);
+      profilePopup.close();
     })
     .catch((err) => {
       console.log(err)
@@ -56,16 +56,16 @@ const handleUserInfo = function (userData) {
     })
 }
 
-// Изменение аватарки
+// Изменение аватарки  РАБОТАЕТ
 const handleAvatar = function (linkObject) {
   waitLoading(true, popupSubmitButtonAvatar)
   api.patchAvatar(linkObject.avatar)
     .then((res) => {
-      user.setAvatar(res.avatar)
-      avatarPopup.close()
+      user.setAvatar(res.avatar);
+      avatarPopup.close();
     })
     .catch((err) => {
-      console.log(err) // выведем ошибку в консоль
+      console.log(err);
     })
     .finally(() => {
       waitLoading(false, popupSubmitButtonAvatar)

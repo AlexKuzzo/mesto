@@ -18,10 +18,10 @@
         </button>
         <div class="profile__info">
           <div class="profile__list">
-            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <h1 class="profile__title"></h1>
             <button type="button" class="profile__edit-button"></button>
           </div>
-          <p class="profile__subtitle">Исследователь океана</p>
+          <p class="profile__subtitle"></p>
         </div>
         <button type="button" class="profile__add-button"></button>
       </section>
@@ -34,10 +34,10 @@
     </footer>
 
     <div class="popup popup_type_profile">
-      <form class="popup__form popup__form_profile" name="profile" novalidate>
+      <form class="popup__form popup__form_profile" action="#" name="profile" method="GET" novalidate>
         <h2 class="popup__title">Редактировать профиль</h2>
         <label class="popup__field-container">
-          <input name="profile" id="name-input" type="text" minlength="2" maxlength="40" required class="popup__field popup__field_type_name" placeholder="Имя">
+          <input name="name" id="name-input" type="text" minlength="2" maxlength="40" required class="popup__field popup__field_type_name" placeholder="Имя">
           <span class="popup__input-error" id="name-input-error"></span>
         </label>
         <label class="popup__field-container">
@@ -50,7 +50,7 @@
     </div>
 
     <div class="popup popup_type_add-card">
-      <form class="popup__form popup__form_add-card" name="add-card" novalidate>
+      <form class="popup__form popup__form_add-card" action="#" method="GET" name="card" novalidate>
         <h2 class="popup__title">Новое место</h2>
         <label class="popup__field-container">
           <input name="name" id="card-name-input" type="text" minlength="1" maxlength="30" required placeholder="Название" class="popup__field popup__field_type_name-card">
@@ -97,7 +97,7 @@
       <ul class="element">
         <li class="element__list">
           <img class="element__image" alt="">
-          <button class="element__delete-button" type="button"></button>
+          <!-- <button class="element__delete-button" type="button"></button> -->
         </li>
         <div class="element__item">
           <h2 class="element__title"></h2>

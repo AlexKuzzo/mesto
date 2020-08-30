@@ -3,7 +3,7 @@ export default class Card {
     this._name = photo.name;
     this._link = photo.link;
     this._id = photo._id;
-    this._like = photo.like;
+    this._likes = photo.likes;
     this._owner = photo.owner;
     this._cardSelector = cardSelector;
     this._openPopupByPhoto = openPopupByPhoto;
@@ -13,13 +13,6 @@ export default class Card {
   }
 
   _getTemplate() {
-    // const cardElement = document
-    //   .querySelector(this._cardSelector)
-    //   .content
-    //   .querySelector('.element')
-    //   .cloneNode(true);
-    
-    //   return cardElement;
     return  this._cardSelector.cloneNode(true)
   }
 
@@ -36,14 +29,14 @@ export default class Card {
     elementCard.id = this._id;
 
     // счетчик лайков
-    if (this._like.length >=1 ) {
-      this._scoreLikes.textContent = this._like.length;
+    if (this._likes.length >=1 ) {
+      this._scoreLikes.textContent = this._likes.length;
     }
     
     //перебор лайков для поиска владельца сайта
-    this._like.forEach((likes) => {
-      if(likes._id === this._myId) {
-        const likeButton = this._element.querySelector('.place__button-like');
+    this._likes.forEach((like) => {
+      if(like._id === this._myId) {
+        const likeButton = this._element.querySelector('.element__like-button');
         likeButton.classList.add('element__like-button_active');
       }
     })
@@ -62,12 +55,12 @@ export default class Card {
       })
     }
 
-    this._placeListeners(elementImage, elementName)
+    this._setEventListeners(elementImage, elementName);
 
     return this._element;
  }
 
-  _likes(evt) {
+  _like(evt) {
     // если лайк был проставлен
     if(evt.target.classList.contains('element__like-button_active')) {
       // убрать лайк
@@ -77,12 +70,12 @@ export default class Card {
           evt.target.classList.remove('element__like-button_active');
 
           // если количество лайков больше 0
-          if (res.like.length >=1 ) {
+          if (res.likes.length >=1 ) {
             //вывести количество лайков
-            this._scoreLikes.textContent = res.like.length;
+            this._scoreLikes.textContent = res.likes.length;
           }
           else {
-            // если количество лайков 0 то убрать цифру
+            // убрать цифру 0
             this._scoreLikes.textContent = '';
           }
         })
@@ -97,7 +90,7 @@ export default class Card {
           // добавить активацию
           evt.target.classList.add('element__like-button_active')
           // обновим цифру
-          this._scoreLikes.textContent = res.like.length
+          this._scoreLikes.textContent = res.likes.length
         })
         .catch(err => {
           console.log(err);
@@ -105,22 +98,14 @@ export default class Card {
     }
   }
 
-  // _handleLikeButton(evt) {
-  //   evt.target.classList.toggle('element__like-button_active');
-  // }
-
-  // _handleDeleteCard() {
-  //   this._element.remove()
-  // }
-
   //обработчики
   _setEventListeners(elementImage, elementName) {
     this._element.querySelector('.element__image').addEventListener('click', () => {
       this._openPopupByPhoto(elementImage, elementName);
     });
-    
+
     this._element.querySelector('.element__like-button').addEventListener('click', (evt) => {
-      this._likes(evt)
+      this._like(evt)
     });
   }
 }
