@@ -49,9 +49,9 @@ export default class Card {
       }
     })
 
-    // if (this._owner && this._owner._id !== this._myId) {
-    //   this._element.querySelector('.element__delete-button').remove();
-    // }
+    if (this._owner && this._owner._id !== this._myId) {
+      this._element.querySelector('.element__delete-button').remove();
+    }
 
     this._setEventListeners(elementImage, elementName);
 
