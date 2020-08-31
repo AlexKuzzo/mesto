@@ -21,9 +21,9 @@ export default class PopupWithDeleteCard extends Popup {
 
   setEventListeners(cardId) {
     super.setEventListeners()
-    const buttonYes = this._popup.querySelector('.popup__submit-button')
+    const buttonYes = this._popup.querySelector('.popup__submit-button');
     buttonYes.addEventListener('click', () => {
-      this._handleDeleteCard(cardId)
+      this._handleDeleteCard(cardId);
     })
   }
 }

@@ -8,7 +8,7 @@ import PopupWithForm from './PopupWithForm.js';
 import PopupWithDeleteCard from './PopupWithDeleteCard.js';
 import UserInfo from './UserInfo.js';
 import {initialCards} from './initialCards.js';
-import {popup, popupProfile, popupAddCard, popupPhoto, popupDelete, popupAvatar, cardsAll, popupEditButton, popupFormAddCard,
+import {popupProfile, popupAddCard, popupPhoto, popupDelete, popupAvatar, cardsAll, popupEditButton, popupFormAddCard,
 popupFormProfile, profileName, profileJob, popupAddButton, photoImage, photoName, nameInput, jobInput,
 popupSubmitButtonProfile, popupSubmitButtonCards, popupSubmitButtonAvatar, avatarEditButton, cardsTemplate} from '../utils/constants.js'
 import {waitLoading} from '../utils/utils.js'
@@ -56,7 +56,7 @@ const handleUserInfo = function (userData) {
     })
 }
 
-// Изменение аватарки  РАБОТАЕТ
+// Изменение аватарки
 const handleAvatar = function (linkObject) {
   waitLoading(true, popupSubmitButtonAvatar)
   api.patchAvatar(linkObject.avatar)
@@ -81,22 +81,24 @@ const addNewCard = function (card) {
       addCardPopup.close()
     })
     .catch((err) => {
-      console.log(err) // выведем ошибку в консоль
+      console.log(err) 
     })
     .finally(() => {
       waitLoading(false, popupSubmitButtonCards)
     })
 }
 
-function newCreateCard (photo) {
-  const newElementCard = new Card(photo, cardsTemplate, handleCardClick, handleClickDeleteCard, api.userInfo._id, api);
-  // const templateElement = newElementCard.generateCard();
+
+function newCreateCard (card) {
+  const newElementCard = new Card(card, '.cards-template', handleCardClick, handleClickDeleteCard, api.userInfo._id, api);
+  
   return newElementCard.generateCard();
-  // cardsList.addItem(templateElement);
+  
 }
 
 //удаление карты
-const popupDeleteCard = new PopupWithDeleteCard(popupDelete, api);
+const popupDeleteCard = new PopupWithDeleteCard(popupDelete ,api);
+
 
 const handleClickDeleteCard = function(cardId) {
   popupDeleteCard.open();
@@ -107,7 +109,6 @@ const popupWithImage = new PopupWithImage(popupPhoto, photoImage, photoName);
 
 const handleCardClick = function (photoImage, photoName) {
   popupWithImage.open(photoImage, photoName);
-  popupWithImage.setEventListeners();
 }
 
 const renderCards = function(cards) {
@@ -129,7 +130,6 @@ const user = new UserInfo({
 //попап добавления карточки
 const addCardPopup = new PopupWithForm(popupAddCard, (photo) => {
   addNewCard(photo);
-  // newCreateCard(item, '.cards-template');
 })
 
 //попап аватар

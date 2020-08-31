@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(photo, cardSelector, myId, openPopupByPhoto, openPopupByDeleteCard, api) {
+  constructor(photo, cardSelector, myId, openPopupByPhoto, openPopupByDeleteCard, handleDeleteClick, api) {
     this._name = photo.name;
     this._link = photo.link;
     this._id = photo._id;
@@ -10,10 +10,18 @@ export default class Card {
     this._openPopupByDeleteCard = openPopupByDeleteCard;
     this._myId = myId;
     this._api = api;
+    this._handleDeleteClick = handleDeleteClick;
   }
 
   _getTemplate() {
-    return  this._cardSelector.cloneNode(true)
+    const cardElement = document
+    .querySelector(this._cardSelector)
+    .content
+    .querySelector('.element')
+    .cloneNode(true);
+
+    return cardElement;
+    
   }
 
   generateCard() {
@@ -26,7 +34,7 @@ export default class Card {
     elementImage.src = this._link;
     elementName.textContent = this._name;
     elementImage.alt = this._name;
-    elementCard.id = this._id;
+    // elementCard.id = this._myId;
 
     // счетчик лайков
     if (this._likes.length >=1 ) {
@@ -41,19 +49,9 @@ export default class Card {
       }
     })
 
-    //если автор карточки и он же владелец сайта, то добавляем кнопку удалить
-    if (this._owner._id === this._myId) {
-      const buttonDeleteCard = document.createElement('button');
-
-      buttonDeleteCard.classList.add('.element__delete-button');
-      buttonDeleteCard.setAttribute('type', 'button');
-      buttonDeleteCard.setAttribute('aria-label', 'Удалить');
-      this._element.querySelector('.element').appendChild(buttonDeleteCard);
-      
-      buttonDeleteCard.addEventListener('click', () => {
-        this._openPopupByDeleteCard(this._id);
-      })
-    }
+    // if (this._owner && this._owner._id !== this._myId) {
+    //   this._element.querySelector('.element__delete-button').remove();
+    // }
 
     this._setEventListeners(elementImage, elementName);
 
