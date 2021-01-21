@@ -1,27 +1,28 @@
-import '../pages/index.css';
-import Api from './Api.js';
-import Card from './Card.js';
-import {validationConfig, FormValidator} from './FormValidator.js';
-import Section from './Section.js';
-import PopupWithImage from './PopupWithImage.js';
-import PopupWithForm from './PopupWithForm.js';
-import PopupWithDeleteCard from './PopupWithDeleteCard.js';
-import UserInfo from './UserInfo.js';
-import {initialCards} from './initialCards.js';
+import './index.css';
+import Api from '../components/Api.js';
+import Card from '../components/Card.js';
+import {validationConfig, FormValidator} from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithSubmit from '../components/PopupWithSubmit.js';
+import PopupWithDeleteCard from '../components/PopupWithDeleteCard.js';
+import UserInfo from '../components/UserInfo.js';
+import {initialCards} from '../components/initialCards.js';
 import {popupProfile, popupAddCard, popupPhoto, popupDelete, popupAvatar, cardsAll, popupEditButton, popupFormAddCard,
 popupFormProfile, profileName, profileJob, popupAddButton, photoImage, photoName, nameInput, jobInput,
 popupSubmitButtonProfile, popupSubmitButtonCards, popupSubmitButtonAvatar, avatarEditButton, cardsTemplate} from '../utils/constants.js'
 import {waitLoading} from '../utils/utils.js'
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-14',
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-19',
   headers: {
-    authorization: '9fd6b558-8922-4eb3-a680-6293b0e020a6',
+    authorization: '6af0716c-c3e9-4822-a150-9ccc6645330e',
     'Content-Type': 'application/json'
   }
 });
 
-// Загрузка данных пользователя с сервера
+// Загрузка данных пользователя с сервера РАБОТАЕТ
 api.getUserInfo()
   .then((data) => {
     api.userInfo = data
@@ -40,7 +41,7 @@ api.getUserInfo()
     console.log(err) 
   })
 
-// Изменение данных о пользователе
+// Изменение данных о пользователе РАБОТАЕТ
 const handleUserInfo = function (userData) {
   waitLoading(true, popupSubmitButtonProfile)
   api.patchUserInfo(userData.name, userData.about)
@@ -56,7 +57,7 @@ const handleUserInfo = function (userData) {
     })
 }
 
-// Изменение аватарки
+// Изменение аватарки РАБОТАЕТ
 const handleAvatar = function (linkObject) {
   waitLoading(true, popupSubmitButtonAvatar)
   api.patchAvatar(linkObject.avatar)
@@ -88,16 +89,15 @@ const addNewCard = function (card) {
     })
 }
 
-
+//создание новой карточки
 function newCreateCard (card) {
-  const newElementCard = new Card(card, '.cards-template', handleCardClick, handleClickDeleteCard, api.userInfo._id, api);
+  const newElementCard = new Card(card, '.cards-template', handleCardClick, api.userInfo._id, handleClickDeleteCard, api);
   
   return newElementCard.generateCard();
-  
 }
 
 //удаление карты
-const popupDeleteCard = new PopupWithDeleteCard(popupDelete ,api);
+const popupDeleteCard = new PopupWithDeleteCard(popupDelete, api);
 
 
 const handleClickDeleteCard = function(cardId) {
@@ -105,10 +105,12 @@ const handleClickDeleteCard = function(cardId) {
   popupDeleteCard.setEventListeners(cardId);
 }
 
+//функция клика по фото
 const popupWithImage = new PopupWithImage(popupPhoto, photoImage, photoName);
 
 const handleCardClick = function (photoImage, photoName) {
   popupWithImage.open(photoImage, photoName);
+  popupWithImage.setEventListeners()
 }
 
 const renderCards = function(cards) {

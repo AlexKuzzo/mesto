@@ -16,7 +16,7 @@ export default class PopupWithDeleteCard extends Popup {
       })
       .catch(err => {
         console.log(err)
-    })
+      })
   }
 
   setEventListeners(cardId) {

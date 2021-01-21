@@ -1,4 +1,4 @@
-import Popup from './Popup.js';
+import Popup  from './Popup.js';
 
 export default class PopupWithForm extends Popup {
   constructor(popup, submitHandler) {
@@ -20,17 +20,13 @@ export default class PopupWithForm extends Popup {
   setEventListeners() {
     super.setEventListeners();
 
-    // закрываем попап при сабмите
-    const popupSubmitButton = this._form.querySelector('.popup__submit-button');
-    this._form.addEventListener('submit', (evt) => {
-      if (popupSubmitButton.classList.contains('popup__submit-button_disabled'))
-        {return false}
-        else {
-          evt.preventDefault();
-          this._submitHandler(this._getInputValues());
-          this.close();
-        }
-    })
+    this._popup.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+      //исправил ошибку по ревью
+      //вызовем функцию _submitHandler и передадим ей _getInputValues c ее выполненной работой
+      this._submitHandler(this._getInputValues());
+      this.close();
+    });
   }
 
   close() {
