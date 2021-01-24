@@ -5,13 +5,11 @@ import {validationConfig, FormValidator} from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
-import PopupWithSubmit from '../components/PopupWithSubmit.js';
 import PopupWithDeleteCard from '../components/PopupWithDeleteCard.js';
 import UserInfo from '../components/UserInfo.js';
-import {initialCards} from '../components/initialCards.js';
 import {popupProfile, popupAddCard, popupPhoto, popupDelete, popupAvatar, cardsAll, popupEditButton, popupFormAddCard,
 popupFormProfile, profileName, profileJob, popupAddButton, photoImage, photoName, nameInput, jobInput,
-popupSubmitButtonProfile, popupSubmitButtonCards, popupSubmitButtonAvatar, avatarEditButton, cardsTemplate} from '../utils/constants.js'
+popupSubmitButtonProfile, popupSubmitButtonCards, popupSubmitButtonAvatar, avatarEditButton, cardsTemplate, initialCards} from '../utils/constants.js'
 import {waitLoading} from '../utils/utils.js'
 
 const api = new Api({
@@ -22,26 +20,28 @@ const api = new Api({
   }
 });
 
-// Загрузка данных пользователя с сервера РАБОТАЕТ
+// Загрузка данных пользователя с сервера
 api.getUserInfo()
   .then((data) => {
     api.userInfo = data
     user.setUserInfo({ name: data.name, about: data.about })
     user.setAvatar(data.avatar)
-    // Загрузка карточек с сервера
-    api.getInitialCards()
-      .then((cards) => {
-        renderCards(cards).renderItems()
-      })
-      .catch((err) => {
-        console.log(err) 
-      })
   })
   .catch((err) => {
     console.log(err) 
   })
 
-// Изменение данных о пользователе РАБОТАЕТ
+// Загрузка карточек с сервера
+  api.getInitialCards()
+    .then((cards) => {
+    cardsList.renderItems(cards)
+    })
+    .catch((err) => {
+      console.log(err) 
+    })
+  
+
+// Изменение данных о пользователе 
 const handleUserInfo = function (userData) {
   waitLoading(true, popupSubmitButtonProfile)
   api.patchUserInfo(userData.name, userData.about)
@@ -57,7 +57,7 @@ const handleUserInfo = function (userData) {
     })
 }
 
-// Изменение аватарки РАБОТАЕТ
+// Изменение аватарки
 const handleAvatar = function (linkObject) {
   waitLoading(true, popupSubmitButtonAvatar)
   api.patchAvatar(linkObject.avatar)
@@ -78,7 +78,7 @@ const addNewCard = function (card) {
   waitLoading(true, popupSubmitButtonCards)
   api.postNewCard(card.name, card.link)
     .then((card) => {
-      renderCards().addNewCard(newCreateCard(card))
+      cardsList.addNewCard(newCreateCard(card))
       addCardPopup.close()
     })
     .catch((err) => {
@@ -97,31 +97,39 @@ function newCreateCard (card) {
 }
 
 //удаление карты
-const popupDeleteCard = new PopupWithDeleteCard(popupDelete, api);
+const popupDeleteCard = new PopupWithDeleteCard(popupDelete);
 
-
-const handleClickDeleteCard = function(cardId) {
+function handleClickDeleteCard (cardId) {
+  popupDeleteCard.setSubmitAction(() => {
+    api.deleteCard(cardId)
+    .then((res) => {
+    const card = document.querySelector('.element')
+    card.remove()
+    popupDeleteCard.close();
+    console.log(res)
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  });
   popupDeleteCard.open();
-  popupDeleteCard.setEventListeners(cardId);
-}
+};
+
+popupDeleteCard.setEventListeners();
 
 //функция клика по фото
 const popupWithImage = new PopupWithImage(popupPhoto, photoImage, photoName);
+popupWithImage.setEventListeners()
 
 const handleCardClick = function (photoImage, photoName) {
   popupWithImage.open(photoImage, photoName);
-  popupWithImage.setEventListeners()
 }
 
-const renderCards = function(cards) {
-  const cardsList = new Section({
-    items: cards,
-    renderer: (photo) => {
-      cardsList.addItem(newCreateCard(photo));
-    }
-  }, cardsAll)
-  return cardsList
-}
+const cardsList = new Section({
+  renderer: (photo) => {
+    cardsList.addItem(newCreateCard(photo));
+  }
+}, cardsAll)
 
 // profile пользователя
 const user = new UserInfo({
@@ -162,18 +170,18 @@ popupEditButton.addEventListener('click', () => {
   profilePopup.open();
   editProfileFormValidator.deleteErrors();
   editProfileFormValidator.resetButtonSubmit();
-})
+});
 
 // обработчик на добавление картинки
 popupAddButton.addEventListener('click', () => {
   addCardPopup.open();
   addCardFormValidator.deleteErrors();
   addCardFormValidator.resetButtonSubmit();
-})
+});
 
 //обработчик на аватар
 avatarEditButton.addEventListener('click', () => {
   avatarPopup.open()
   avatarFormValidator.deleteErrors();
   avatarFormValidator.resetButtonSubmit();
-})
+});

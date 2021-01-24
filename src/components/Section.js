@@ -5,8 +5,8 @@ export default class Section {
     this._container = containerSelector;
   }
 
-  renderItems() {
-    this._renderedItems.forEach(card => this._renderer(card));
+  renderItems(items) {
+    items.forEach(card => this._renderer(card));
   }
 
   addItem(card) {
