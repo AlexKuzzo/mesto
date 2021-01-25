@@ -134,7 +134,8 @@ const cardsList = new Section({
 // profile пользователя
 const user = new UserInfo({
   name: profileName,
-  job: profileJob
+  job: profileJob,
+  avatar: document.querySelector('.profile__avatar')
 })
 
 //попап добавления карточки

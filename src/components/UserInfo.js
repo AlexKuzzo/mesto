@@ -17,11 +17,9 @@ export default class UserInfo {
   setUserInfo({name, about}) {
     this._name.textContent = name;
     this._job.textContent = about;
-    this._avatar = document.querySelector('.profile__avatar');
-    
   }
 
-  //исправил ошибку по ревью
+  //метод для аватарки
   setAvatar(avatar) {
     this._avatar.src = avatar;
   }
