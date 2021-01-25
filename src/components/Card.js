@@ -39,33 +39,12 @@ export default class Card {
       this._scoreLikes.textContent = this._likes.length;
     }
     
-    // если id автора карточки = id владельца страницы, то добавить карточке кнопку удаления и навесить на нее листенер
-    // if (this._owner._id === this._myId) {
-    //   const cardDeleteButton = document.createElement('button');
-    //   cardDeleteButton.classList.add('element__delete-button');
-    //   cardDeleteButton.setAttribute('type', 'button');
-    //   cardDeleteButton.setAttribute('aria-label', 'Удалить');
-    //   this._element.querySelector('.element__list').appendChild(cardDeleteButton);
-
-      
-    
-    //   // добавим листенер для открытия попапа по клику на иконку удаления
-    //   cardDeleteButton.addEventListener('click', () => {
-    //       this._openPopupDeleteCard(this._id);
-    //     })
-    //   }
-
     this._element.querySelector('.element__delete-button').addEventListener('click', () => {
-      this._openPopupDeleteCard(this._id);
+      this._openPopupDeleteCard(this._id, this._element);
       });
 
       if (this._owner && this._owner._id !== this._myId) {
         this._element.querySelector('.element__delete-button').remove();
-
-        // this._.addEventListener('click', () => {
-        // this._openPopupDeleteCard(this._element, this._id);
-        //  })
-        
       }
 
     //перебор лайков, если лайк владельца то закрасим его

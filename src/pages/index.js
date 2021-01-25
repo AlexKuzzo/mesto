@@ -99,11 +99,11 @@ function newCreateCard (card) {
 //удаление карты
 const popupDeleteCard = new PopupWithDeleteCard(popupDelete);
 
-function handleClickDeleteCard (cardId) {
+function handleClickDeleteCard (cardId, card) {
   popupDeleteCard.setSubmitAction(() => {
     api.deleteCard(cardId)
     .then((res) => {
-    const card = document.querySelector('.element')
+    // const card = document.querySelector('.element')
     card.remove()
     popupDeleteCard.close();
     console.log(res)

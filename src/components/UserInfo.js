@@ -3,7 +3,6 @@ export default class UserInfo {
     this._name = name;
     this._job = job;
     this._avatar = avatar;
-    this._userAvatar = document.querySelector('.profile__avatar');
   }
 
   //метод getUserInfo, который возвращает объект с данными пользователя
@@ -18,10 +17,12 @@ export default class UserInfo {
   setUserInfo({name, about}) {
     this._name.textContent = name;
     this._job.textContent = about;
+    this._avatar = document.querySelector('.profile__avatar');
+    
   }
 
   //исправил ошибку по ревью
   setAvatar(avatar) {
-    this._userAvatar.src = avatar;
+    this._avatar.src = avatar;
   }
 }
