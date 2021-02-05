@@ -1,5 +1,5 @@
 # Проект 9: Место
-Итог работы: https://alexkuzzo.github.io/mesto/index.html
+Итог работы: https://alexkuzzo.github.io/mesto/
 
 
 ### Обзор
